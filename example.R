@@ -39,7 +39,7 @@ mnist <- datasets$mnist$read_data_sets("MNIST-data", one_hot = TRUE)
 fc <- c(tf$contrib$layers$real_valued_column("", dimension = 784L))
 classifier <- tf$contrib$learn$DNNClassifier(feature_columns = fc,
                                       n_classes = 10L, model_dir = "/tmp/mnist_m",
-                                      hidden_units = c(392L, 196L, 196L)) ### FIXME:
+                                      hidden_units = c(392L, 196L, 196L)) 
 
 train.labels <- as.integer(apply(mnist$train$labels, 1, function(x) which(x == 1)) - 1L)
 classifier$fit(x = mnist$train$images,
