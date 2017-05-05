@@ -31,3 +31,20 @@ reticulate::iterate(y, print)
 
 y <- classifier$predict(data.matrix(iris.test[,1:4]))
 reticulate::iterate(y, print)
+
+datasets <- tf$contrib$learn$datasets
+mnist <- datasets$mnist$read_data_sets("MNIST-data", one_hot = TRUE)
+
+fc <- c(tf$contrib$layers$real_valued_column("", dimension = 784L))
+classifier <- tf$contrib$learn$DNNClassifier(feature_columns = fc,
+                                      n_classes = 10L, model_dir = "/tmp/mnist_m",
+                                      hidden_units = c(392L, 196L, 196L)) ### FIXME:
+
+train.labels <- as.integer(apply(mnist$train$labels, 1, function(x) which(x == 1)) - 1L)
+classifier$fit(x = mnist$train$images,
+               y = train.labels,
+               steps = 100L)
+
+test.labels <- as.integer(apply(mnist$test$labels, 1, function(x) which(x == 1)) - 1L)
+classifier$evaluate(x = mnist$test$images,
+                    y = test.labels)["accuracy"]
