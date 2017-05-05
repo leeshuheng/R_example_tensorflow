@@ -1,4 +1,5 @@
 ### credit: https://haosdent.gitbooks.io/tensorflow-document/content/tutorials/tflearn/
+### credit: https://rstudio.github.io/tensorflow/tutorial_mnist_pros.html
 
 library(tensorflow)
 
